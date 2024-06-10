@@ -4,6 +4,9 @@ import {Box, Button, Grid, TextField, Typography} from "@mui/material";
 import {KickSequence} from "./components/drum-section/kick-sequence";
 import {HatSequence} from "./components/drum-section/hat-sequence";
 import {ClapSequence} from "./components/drum-section/clap-sequence";
+import {pink} from "@mui/material/colors";
+
+export const markIndexSequence = [1, 5, 9, 13]
 
 
 function App() {
@@ -16,7 +19,6 @@ function App() {
   const [bpm, setBpm] = useState(500);
   const [timePoint, setTimePoint] = useState(0);
 
-  const markIndexSequence = [1, 5, 9, 13]
 
   const modifyBpm = (e: any) => {
     setBpm(Number(e.target.value));
@@ -65,7 +67,7 @@ function App() {
             Index
           </Typography>
           {arraySequence.map((item, index) => (
-            <Typography minWidth="25px" maxWidth="25px" color={markIndexSequence.includes(index + 1) ? "red" : ""}>{index + 1}</Typography>
+            <Typography minWidth="25px" maxWidth="25px" color={markIndexSequence.includes(index + 1) ? pink[800] : undefined}>{index + 1}</Typography>
           ))}
         </Grid>
 

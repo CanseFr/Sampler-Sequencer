@@ -6,6 +6,7 @@ import React, {Dispatch, SetStateAction, useEffect, useState} from "react";
 import {Grid, SelectChangeEvent} from "@mui/material";
 import {SelectableSequence} from "../selectable/selectable-sequence";
 import {SelectableSample} from "../selectable/selectable-sample";
+import {GridSampleSequence} from "../generic-components/grid-sample-sequence";
 
 export interface InstrumentSequenceProps {
   timePoint: number;
@@ -47,11 +48,11 @@ export const KickSequence = ({timePoint, sequence, setSequence}: InstrumentSeque
 
 
   return (
-    <Grid container justifyContent="space-around">
+    <GridSampleSequence>
       <SelectableSample instrumentSelectedIndex={kickSelect} handleChangeInstrument={handleChangeKick} arraySample={kickArraySample} name="Kick"/>
       {sequence.map((item, index) => (
         <SelectableSequence index={index} item={item} handleSelect={handleSelectKick}/>
       ))}
-    </Grid>
+    </GridSampleSequence>
   )
 }

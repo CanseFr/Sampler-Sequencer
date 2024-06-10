@@ -3,10 +3,11 @@ import hat_chipitaka from '../../assets/hats/hat_chipitaka.wav';
 import hat_626 from '../../assets/hats/hat_626.wav';
 import hat_addverb from '../../assets/hats/hat_addverb.wav';
 import React, {useEffect, useState} from "react";
-import {Grid, SelectChangeEvent} from "@mui/material";
+import {SelectChangeEvent} from "@mui/material";
 import {InstrumentSequenceProps} from "./kick-sequence";
 import {SelectableSequence} from "../selectable/selectable-sequence";
 import {SelectableSample} from "../selectable/selectable-sample";
+import {GridSampleSequence} from "../generic-components/grid-sample-sequence";
 
 
 export const HatSequence = ({timePoint, sequence, setSequence}: InstrumentSequenceProps) => {
@@ -43,11 +44,11 @@ export const HatSequence = ({timePoint, sequence, setSequence}: InstrumentSequen
 
 
   return (
-    <Grid container justifyContent="space-around">
+    <GridSampleSequence>
       <SelectableSample instrumentSelectedIndex={hatSelect} handleChangeInstrument={handleChangeHat} arraySample={hatArraySample} name="Hat"/>
       {sequence.map((item, index) => (
         <SelectableSequence index={index} item={item} handleSelect={handleSelectHat}/>
       ))}
-    </Grid>
+    </GridSampleSequence>
   )
 }

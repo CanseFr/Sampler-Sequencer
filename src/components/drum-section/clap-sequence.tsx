@@ -7,6 +7,7 @@ import {Grid, SelectChangeEvent} from "@mui/material";
 import {InstrumentSequenceProps} from "./kick-sequence";
 import {SelectableSequence} from "../selectable/selectable-sequence";
 import {SelectableSample} from "../selectable/selectable-sample";
+import {GridSampleSequence} from "../generic-components/grid-sample-sequence";
 
 export const ClapSequence = ({timePoint, sequence, setSequence}: InstrumentSequenceProps) => {
 
@@ -43,12 +44,11 @@ export const ClapSequence = ({timePoint, sequence, setSequence}: InstrumentSeque
 
 
   return (
-    <Grid container justifyContent="space-around">
+    <GridSampleSequence>
       <SelectableSample instrumentSelectedIndex={clapSelect} handleChangeInstrument={handleChangeClap} arraySample={clapArraySample} name="Clap"/>
       {sequence.map((item, index) => (
         <SelectableSequence index={index} item={item} handleSelect={handleSelectClap}/>
       ))}
-    </Grid>
-
+    </GridSampleSequence>
   )
 }
