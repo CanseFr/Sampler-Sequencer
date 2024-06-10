@@ -13,7 +13,7 @@ function App() {
   const [arraySequence, setArraySequence] = useState(new Array(16).fill(0));
 
   const [kickSequence, setKickSequence] = useState(new Array(16).fill(0));
-  const [htaSequence, setHatSequence] = useState(new Array(16).fill(0));
+  const [hatSequence, setHatSequence] = useState(new Array(16).fill(0));
   const [clapSequence, setClapSequence] = useState(new Array(16).fill(0));
 
   const [bpm, setBpm] = useState(500);
@@ -59,12 +59,11 @@ function App() {
             label="Outlined"
             variant="outlined"
           />
-          <Button onClick={handleResetPattern}>Reset All</Button>
+          <Button onClick={handleResetPattern}>Reset Pattern</Button>
         </Box>
 
         <Grid container justifyContent="space-around">
           <Typography minWidth="200px" maxWidth="200px">
-            Index
           </Typography>
           {arraySequence.map((item, index) => (
             <Typography minWidth="25px" maxWidth="25px" color={markIndexSequence.includes(index + 1) ? pink[800] : undefined}>{index + 1}</Typography>
@@ -73,7 +72,6 @@ function App() {
 
         <Grid container justifyContent="space-around">
           <Typography minWidth="200px" maxWidth="200px">
-            Sequence
           </Typography>
           {arraySequence.map((item, index) => (
             <span key={index} className={item === 0 ? 'dot' : 'dot-red'}></span>
@@ -81,7 +79,7 @@ function App() {
         </Grid>
 
         <KickSequence timePoint={timePoint} sequence={kickSequence} setSequence={setKickSequence}/>
-        <HatSequence timePoint={timePoint} sequence={htaSequence} setSequence={setHatSequence}/>
+        <HatSequence timePoint={timePoint} sequence={hatSequence} setSequence={setHatSequence}/>
         <ClapSequence timePoint={timePoint} sequence={clapSequence} setSequence={setClapSequence} />
 
       </header>
