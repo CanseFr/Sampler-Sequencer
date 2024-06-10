@@ -3,7 +3,7 @@ import bd_deephouser from '../../assets/bd_kick/bd_deephouser.wav';
 import bd_dandans from '../../assets/bd_kick/bd_dandans.wav';
 import bd_909dwsd from '../../assets/bd_kick/bd_909dwsd.wav';
 import React, {Dispatch, SetStateAction, useEffect, useState} from "react";
-import {Grid, SelectChangeEvent} from "@mui/material";
+import {SelectChangeEvent} from "@mui/material";
 import {SelectableSequence} from "../selectable/selectable-sequence";
 import {SelectableSample} from "../selectable/selectable-sample";
 import {GridSampleSequence} from "../generic-components/grid-sample-sequence";

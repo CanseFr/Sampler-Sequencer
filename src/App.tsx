@@ -6,17 +6,18 @@ import {HatSequence} from "./components/drum-section/hat-sequence";
 import {ClapSequence} from "./components/drum-section/clap-sequence";
 import {pink} from "@mui/material/colors";
 
-export const markIndexSequence = [1, 5, 9, 13]
-
+export const markIndexSequence = [1, 5, 9, 13, 17, 21, 25, 29]
+const TOTAL_STEPS = 16
 
 function App() {
-  const [arraySequence, setArraySequence] = useState(new Array(16).fill(0));
+  const [arraySequence, setArraySequence] = useState(new Array(TOTAL_STEPS).fill(0));
 
-  const [kickSequence, setKickSequence] = useState(new Array(16).fill(0));
-  const [hatSequence, setHatSequence] = useState(new Array(16).fill(0));
-  const [clapSequence, setClapSequence] = useState(new Array(16).fill(0));
+  const [kickSequence, setKickSequence] = useState(new Array(TOTAL_STEPS).fill(0));
+  const [hatSequence, setHatSequence] = useState(new Array(TOTAL_STEPS).fill(0));
+  const [clapSequence, setClapSequence] = useState(new Array(TOTAL_STEPS).fill(0));
 
   const [bpm, setBpm] = useState(500);
+
   const [timePoint, setTimePoint] = useState(0);
 
 
@@ -25,23 +26,20 @@ function App() {
   }
 
   const handleResetPattern = () => {
-    setHatSequence(new Array(16).fill(0));
-    setClapSequence(new Array(16).fill(0));
-    setKickSequence(new Array(16).fill(0));
+    setHatSequence(new Array(TOTAL_STEPS).fill(0));
+    setClapSequence(new Array(TOTAL_STEPS).fill(0));
+    setKickSequence(new Array(TOTAL_STEPS).fill(0));
   }
 
   useEffect(() => {
     const intervalId = setInterval(() => {
       setArraySequence((prev) => {
-        const newArray = new Array(16).fill(0);
+        const newArray = new Array(TOTAL_STEPS).fill(0);
         newArray[timePoint] = 1;
         return newArray;
       });
-
       setTimePoint((prev) => (prev + 1) % arraySequence.length);
-
     }, bpm);
-
     return () => clearInterval(intervalId);
   }, [bpm, timePoint, arraySequence.length]);
 
@@ -80,15 +78,12 @@ function App() {
 
         <KickSequence timePoint={timePoint} sequence={kickSequence} setSequence={setKickSequence}/>
         <HatSequence timePoint={timePoint} sequence={hatSequence} setSequence={setHatSequence}/>
-        <ClapSequence timePoint={timePoint} sequence={clapSequence} setSequence={setClapSequence} />
+        <ClapSequence timePoint={timePoint} sequence={clapSequence} setSequence={setClapSequence}/>
 
       </header>
     </div>
   );
 }
 
-
 export default App;
-
-
 

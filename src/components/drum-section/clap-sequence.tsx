@@ -3,7 +3,7 @@ import clp_can from '../../assets/clap/clp_can.wav';
 import clp_delma from '../../assets/clap/clp_delma.wav';
 import clp_clap10000 from '../../assets/clap/clp_clap10000.wav';
 import React, {useEffect, useState} from "react";
-import {Grid, SelectChangeEvent} from "@mui/material";
+import {SelectChangeEvent} from "@mui/material";
 import {InstrumentSequenceProps} from "./kick-sequence";
 import {SelectableSequence} from "../selectable/selectable-sequence";
 import {SelectableSample} from "../selectable/selectable-sample";
