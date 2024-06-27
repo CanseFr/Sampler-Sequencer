@@ -3,7 +3,7 @@ import bd_deephouser from '../../assets/bd_kick/bd_deephouser.wav';
 import bd_dandans from '../../assets/bd_kick/bd_dandans.wav';
 import bd_909dwsd from '../../assets/bd_kick/bd_909dwsd.wav';
 import React, {Dispatch, SetStateAction, useEffect, useState} from "react";
-import {SelectChangeEvent} from "@mui/material";
+import {Button, SelectChangeEvent} from "@mui/material";
 import {SelectableSequence} from "../selectable/selectable-sequence";
 import {SelectableSample} from "../selectable/selectable-sample";
 import {GridSampleSequence} from "../generic-components/grid-sample-sequence";
@@ -50,6 +50,7 @@ export const KickSequence = ({timePoint, sequence, setSequence}: InstrumentSeque
   return (
     <GridSampleSequence>
       <SelectableSample instrumentSelectedIndex={kickSelect} handleChangeInstrument={handleChangeKick} arraySample={kickArraySample} name="Kick"/>
+      {/*<Button>FX</Button>*/}
       {sequence.map((item, index) => (
         <SelectableSequence index={index} item={item} handleSelect={handleSelectKick}/>
       ))}

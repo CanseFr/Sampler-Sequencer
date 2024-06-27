@@ -5,6 +5,7 @@ import {KickSequence} from "./components/drum-section/kick-sequence";
 import {HatSequence} from "./components/drum-section/hat-sequence";
 import {ClapSequence} from "./components/drum-section/clap-sequence";
 import {pink} from "@mui/material/colors";
+import {WavSequence} from "./components/drum-section/wav-sequence";
 
 export const markIndexSequence = [1, 5, 9, 13, 17, 21, 25, 29]
 const TOTAL_STEPS = 16
@@ -15,20 +16,22 @@ function App() {
   const [kickSequence, setKickSequence] = useState(new Array(TOTAL_STEPS).fill(0));
   const [hatSequence, setHatSequence] = useState(new Array(TOTAL_STEPS).fill(0));
   const [clapSequence, setClapSequence] = useState(new Array(TOTAL_STEPS).fill(0));
+  const [wavSequence, setWavSequence] = useState(new Array(TOTAL_STEPS).fill(0));
 
-  const [bpm, setBpm] = useState(500);
+  const [bpm, setBpm] = useState(428.6/4);
 
   const [timePoint, setTimePoint] = useState(0);
 
 
   const modifyBpm = (e: any) => {
-    setBpm(Number(e.target.value));
+    setBpm(Number((60000/e.target.value*1)/4));
   }
 
   const handleResetPattern = () => {
     setHatSequence(new Array(TOTAL_STEPS).fill(0));
     setClapSequence(new Array(TOTAL_STEPS).fill(0));
     setKickSequence(new Array(TOTAL_STEPS).fill(0));
+    setWavSequence(new Array(TOTAL_STEPS).fill(0));
   }
 
   useEffect(() => {
@@ -79,6 +82,7 @@ function App() {
         <KickSequence timePoint={timePoint} sequence={kickSequence} setSequence={setKickSequence}/>
         <HatSequence timePoint={timePoint} sequence={hatSequence} setSequence={setHatSequence}/>
         <ClapSequence timePoint={timePoint} sequence={clapSequence} setSequence={setClapSequence}/>
+        {/*<WavSequence timePoint={timePoint} sequence={wavSequence} setSequence={setWavSequence}/>*/}
 
       </header>
     </div>
