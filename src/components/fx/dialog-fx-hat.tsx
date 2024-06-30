@@ -6,7 +6,7 @@ import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import CloseIcon from '@mui/icons-material/Close';
 import Slide from '@mui/material/Slide';
-import { TransitionProps } from '@mui/material/transitions';
+import {TransitionProps} from '@mui/material/transitions';
 import {AccordionFx} from "./accordion-fx";
 import {pink} from "@mui/material/colors";
 
@@ -23,14 +23,14 @@ interface Props {
   open: any;
   setOpen: any;
   handleWet: any;
-  handleDecay?: any;
-  handlePreDelay?: any;
   wet: any;
+  handleDecay: any;
+  decay: any;
+  handlePreDelay: any;
+  preDelay: any;
 }
 
-export const DialogFxHat = ({open, setOpen,handleWet,wet}:Props) => {
-// export const DialogFxHat = ({open, setOpen,handleWet, handleDecay, handlePreDelay}:Props) => {
-
+export const DialogFxHat = ({open, setOpen, handleWet, wet, handleDecay, decay, handlePreDelay, preDelay}: Props) => {
 
 
   const handleClose = () => {
@@ -38,28 +38,28 @@ export const DialogFxHat = ({open, setOpen,handleWet,wet}:Props) => {
   };
 
   return (
-      <Dialog
-        fullScreen
-        open={open}
-        onClose={handleClose}
-        TransitionComponent={Transition}
-      >
-        <AppBar sx={{ position: 'relative',backgroundColor: "black", color: pink[800] }}>
-          <Toolbar>
-            <IconButton
-              edge="start"
-              color="inherit"
-              onClick={handleClose}
-              aria-label="close"
-            >
-              <CloseIcon />
-            </IconButton>
-            <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
-              FX
-            </Typography>
-          </Toolbar>
-        </AppBar>
-        <AccordionFx handleWet={handleWet} wet={wet} />
-      </Dialog>
+    <Dialog
+      fullScreen
+      open={open}
+      onClose={handleClose}
+      TransitionComponent={Transition}
+    >
+      <AppBar sx={{position: 'relative', backgroundColor: "black", color: pink[800]}}>
+        <Toolbar>
+          <IconButton
+            edge="start"
+            color="inherit"
+            onClick={handleClose}
+            aria-label="close"
+          >
+            <CloseIcon/>
+          </IconButton>
+          <Typography sx={{ml: 2, flex: 1}} variant="h6" component="div">
+            FX
+          </Typography>
+        </Toolbar>
+      </AppBar>
+      <AccordionFx handleWet={handleWet} wet={wet} handleDecay={handleDecay} decay={decay} handlePreDelay={handlePreDelay} preDelay={preDelay}/>
+    </Dialog>
   );
 }

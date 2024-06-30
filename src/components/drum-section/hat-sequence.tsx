@@ -60,7 +60,6 @@ import {InstrumentSequenceProps} from "./kick-sequence";
 import {SelectableSequence} from "../selectable/selectable-sequence";
 import {GridSampleSequence} from "../generic-components/grid-sample-sequence";
 import * as Tone from "tone";
-import Slider from '@mui/material/Slider';
 import Button from "@mui/material/Button";
 import {DialogFxHat} from "../fx/dialog-fx-hat";
 
@@ -74,31 +73,25 @@ export const HatSequence = ({timePoint, sequence, setSequence}: InstrumentSequen
   ).toDestination();
 
   const [wet, setWet] = useState<number>(0);
-  // const [decay, setDecay] = useState<number>(0.00);
-  // const [preDelay, setPreDelay] = useState<number>(0.00);
+  const [decay, setDecay] = useState<number>(0.2);
+  const [preDelay, setPreDelay] = useState<number>(0.2);
 
   const handleWet = () => {
-    setWet(wet===0?1:0);
-    console.log(wet);
+    setWet(wet === 0 ? 1 : 0);
   };
-  //
-  // const handleDecay = (event: Event, newValue: number | number[])  => {
-  //   setDecay(newValue as number);
-  // };
-  //
-  // const handlePreDelay = (event: Event, newValue: number | number[])  => {
-  //   setPreDelay(newValue as number);
-  // };
 
+  const handleDecay = (value: any) => {
+    setDecay(value);
+  };
 
+  const handlePreDelay = (value: any) => {
+    setPreDelay(value);
+  };
 
   const feedbackDelay = new Tone.Reverb({
     "wet": wet,
-    // "wet": wet,
-    "decay": 0.2,
-    // "decay": decay,
-    "preDelay": 0.2
-    // "preDelay": preDelay
+    "decay": decay,
+    "preDelay": preDelay
   }).toDestination();
 
   const handleSelectHat = (index: number) => {
@@ -119,23 +112,21 @@ export const HatSequence = ({timePoint, sequence, setSequence}: InstrumentSequen
         player.connect(feedbackDelay).start();
       });
     }
-  }, [ sequence, timePoint]);
+  }, [sequence, timePoint]);
 
   return (
     <>
+      {open && <DialogFxHat open={open} setOpen={setOpen} wet={wet} handleWet={handleWet} handleDecay={handleDecay} decay={decay} handlePreDelay={handlePreDelay} preDelay={preDelay}/>}
+      <GridSampleSequence>
 
-    {open && <DialogFxHat open={open} setOpen={setOpen} wet={wet} handleWet={handleWet} />}
-    {/*{open && <DialogFxHat open={open} setOpen={setOpen} handleWet={handleWet} handleDecay={handleDecay} handlePreDelay={handlePreDelay}/>}*/}
-    <GridSampleSequence>
-
-      <Typography>Hat</Typography>
-      <Button variant="outlined" onClick={handleClickOpen}>
-        FX
-      </Button>
-      {sequence.map((item, index) => (
-        <SelectableSequence index={index} item={item} handleSelect={handleSelectHat}/>
-      ))}
-    </GridSampleSequence>
+        <Typography>Hat</Typography>
+        <Button variant="outlined" onClick={handleClickOpen}>
+          FX
+        </Button>
+        {sequence.map((item, index) => (
+          <SelectableSequence index={index} item={item} handleSelect={handleSelectHat}/>
+        ))}
+      </GridSampleSequence>
     </>
   )
 }
