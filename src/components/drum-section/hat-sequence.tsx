@@ -66,7 +66,7 @@ import {DialogFxHat} from "../fx/dialog-fx-hat";
 
 export const HatSequence = ({timePoint, sequence, setSequence}: InstrumentSequenceProps) => {
 
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState<boolean>(false);
 
   const player = new Tone.Player(
     hat_chipitaka
@@ -80,13 +80,6 @@ export const HatSequence = ({timePoint, sequence, setSequence}: InstrumentSequen
     setWet(wet === 0 ? 1 : 0);
   };
 
-  const handleDecay = (value: any) => {
-    setDecay(value);
-  };
-
-  const handlePreDelay = (value: any) => {
-    setPreDelay(value);
-  };
 
   const feedbackDelay = new Tone.Reverb({
     "wet": wet,
@@ -102,29 +95,25 @@ export const HatSequence = ({timePoint, sequence, setSequence}: InstrumentSequen
     });
   }
 
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
   useEffect(() => {
     if (sequence[timePoint - 1] === 1) {
       Tone.loaded().then(() => {
         player.connect(feedbackDelay).start();
       });
     }
-  }, [sequence, timePoint]);
+  }, [feedbackDelay, player, sequence, timePoint]);
 
   return (
     <>
-      {open && <DialogFxHat open={open} setOpen={setOpen} wet={wet} handleWet={handleWet} handleDecay={handleDecay} decay={decay} handlePreDelay={handlePreDelay} preDelay={preDelay}/>}
+      {open && <DialogFxHat open={open} setOpen={setOpen} wet={wet} handleWet={handleWet} handleDecay={setDecay} decay={decay} handlePreDelay={setPreDelay} preDelay={preDelay}/>}
       <GridSampleSequence>
 
         <Typography>Hat</Typography>
-        <Button variant="outlined" onClick={handleClickOpen}>
+        <Button variant="outlined" onClick={()=>setOpen(!open)}>
           FX
         </Button>
         {sequence.map((item, index) => (
-          <SelectableSequence index={index} item={item} handleSelect={handleSelectHat}/>
+          <SelectableSequence key={index} index={index} item={item} handleSelect={handleSelectHat}/>
         ))}
       </GridSampleSequence>
     </>

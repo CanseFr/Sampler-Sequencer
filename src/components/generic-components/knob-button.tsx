@@ -1,11 +1,11 @@
-import React, {useState} from "react";
+import React, {Dispatch, SetStateAction} from "react";
 import {Knob, KnobChangeEvent} from 'primereact/knob';
 import {Grid, Typography} from "@mui/material";
 
 interface KnobButtonProps {
   label: string;
-  value: any;
-  setValue: any;
+  value: number;
+  setValue: Dispatch<SetStateAction<number>>;
   min: number;
   max: number;
   step: number

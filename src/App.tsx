@@ -67,7 +67,7 @@ function App() {
           <Typography minWidth="200px" maxWidth="200px">
           </Typography>
           {arraySequence.map((item, index) => (
-            <Typography minWidth="25px" maxWidth="25px" color={markIndexSequence.includes(index + 1) ? pink[800] : undefined}>{index + 1}</Typography>
+            <Typography key={index} minWidth="25px" maxWidth="25px" color={markIndexSequence.includes(index + 1) ? pink[800] : undefined}>{index + 1}</Typography>
           ))}
         </Grid>
 

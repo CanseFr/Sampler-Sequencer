@@ -9,6 +9,7 @@ import Slide from '@mui/material/Slide';
 import {TransitionProps} from '@mui/material/transitions';
 import {AccordionFx} from "./accordion-fx";
 import {pink} from "@mui/material/colors";
+import {Dispatch, SetStateAction} from "react";
 
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {
@@ -20,14 +21,17 @@ const Transition = React.forwardRef(function Transition(
 });
 
 interface Props {
-  open: any;
-  setOpen: any;
-  handleWet: any;
-  wet: any;
-  handleDecay: any;
-  decay: any;
-  handlePreDelay: any;
-  preDelay: any;
+  open: boolean;
+  setOpen: Dispatch<SetStateAction<boolean>>;
+
+  handleWet: Dispatch<SetStateAction<number>>;
+  wet: number;
+
+  handleDecay:Dispatch<SetStateAction<number>>;
+  decay: number;
+
+  handlePreDelay:Dispatch<SetStateAction<number>>;
+  preDelay: number;
 }
 
 export const DialogFxHat = ({open, setOpen, handleWet, wet, handleDecay, decay, handlePreDelay, preDelay}: Props) => {

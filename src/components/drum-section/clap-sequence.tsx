@@ -47,7 +47,7 @@ export const ClapSequence = ({timePoint, sequence, setSequence}: InstrumentSeque
     <GridSampleSequence>
       <SelectableSample instrumentSelectedIndex={clapSelect} handleChangeInstrument={handleChangeClap} arraySample={clapArraySample} name="Clap"/>
       {sequence.map((item, index) => (
-        <SelectableSequence index={index} item={item} handleSelect={handleSelectClap}/>
+        <SelectableSequence key={index} index={index} item={item} handleSelect={handleSelectClap}/>
       ))}
     </GridSampleSequence>
   )

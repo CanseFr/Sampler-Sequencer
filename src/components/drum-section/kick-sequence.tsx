@@ -52,7 +52,7 @@ export const KickSequence = ({timePoint, sequence, setSequence}: InstrumentSeque
       <SelectableSample instrumentSelectedIndex={kickSelect} handleChangeInstrument={handleChangeKick} arraySample={kickArraySample} name="Kick"/>
       {/*<Button>FX</Button>*/}
       {sequence.map((item, index) => (
-        <SelectableSequence index={index} item={item} handleSelect={handleSelectKick}/>
+        <SelectableSequence key={index} index={index} item={item} handleSelect={handleSelectKick}/>
       ))}
     </GridSampleSequence>
   )

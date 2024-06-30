@@ -9,16 +9,17 @@ import {pink} from "@mui/material/colors";
 import Switch from '@mui/material/Switch';
 import {FormControlLabel, Grid} from "@mui/material";
 import {KnobButton} from "../generic-components/knob-button";
+import {Dispatch, SetStateAction} from "react";
 
 interface FxProps {
   handleWet: any;
-  wet: any;
+  wet: number;
 
-  handleDecay: any;
-  decay: any;
+  handleDecay: Dispatch<SetStateAction<number>>;
+  decay: number;
 
-  preDelay: any;
-  handlePreDelay: any;
+  handlePreDelay: Dispatch<SetStateAction<number>>;
+  preDelay: number;
 }
 
 export const AccordionFx = ({handleWet, wet, handleDecay, decay, preDelay, handlePreDelay}: FxProps) => {
@@ -54,7 +55,7 @@ export const AccordionFx = ({handleWet, wet, handleDecay, decay, preDelay, handl
               {/* ON OFF Delay*/}
               <FormControlLabel
                 control={<Switch/>}
-                onChange={handleWet}
+                onClick={handleWet}
                 label={wet ? "On" : "Off"}
               />
             </Grid>
