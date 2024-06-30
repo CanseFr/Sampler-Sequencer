@@ -75,11 +75,7 @@ export const HatSequence = ({timePoint, sequence, setSequence}: InstrumentSequen
 
   const [feedbackDelay, setFeedbackDelay] = useState<FeedbackDelayType>(initFeedbackDelay);
 
-  const toneFeedbackDelay = new Tone.Reverb({
-    "wet": feedbackDelay.wet,
-    "decay": feedbackDelay.decay,
-    "preDelay": feedbackDelay.preDelay
-  }).toDestination();
+  const toneFeedbackDelay = new Tone.Reverb(feedbackDelay).toDestination();
 
   const handleSelectHat = (index: number) => {
     setSequence((prev) => {
