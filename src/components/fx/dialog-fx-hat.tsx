@@ -10,6 +10,7 @@ import {TransitionProps} from '@mui/material/transitions';
 import {AccordionFx} from "./accordion-fx";
 import {pink} from "@mui/material/colors";
 import {Dispatch, SetStateAction} from "react";
+import {FeedbackDelayType} from "../types/feedback-delay";
 
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {
@@ -24,28 +25,17 @@ interface Props {
   open: boolean;
   setOpen: Dispatch<SetStateAction<boolean>>;
 
-  handleWet: Dispatch<SetStateAction<number>>;
-  wet: number;
-
-  handleDecay:Dispatch<SetStateAction<number>>;
-  decay: number;
-
-  handlePreDelay:Dispatch<SetStateAction<number>>;
-  preDelay: number;
+  setFeedbackDelay: Dispatch<SetStateAction<FeedbackDelayType>>;
+  feedbackDelay: FeedbackDelayType;
 }
 
-export const DialogFxHat = ({open, setOpen, handleWet, wet, handleDecay, decay, handlePreDelay, preDelay}: Props) => {
-
-
-  const handleClose = () => {
-    setOpen(false);
-  };
+export const DialogFxHat = ({open, setOpen, setFeedbackDelay, feedbackDelay}: Props) => {
 
   return (
     <Dialog
       fullScreen
       open={open}
-      onClose={handleClose}
+      onClose={()=>setOpen(false)}
       TransitionComponent={Transition}
     >
       <AppBar sx={{position: 'relative', backgroundColor: "black", color: pink[800]}}>
@@ -53,7 +43,7 @@ export const DialogFxHat = ({open, setOpen, handleWet, wet, handleDecay, decay, 
           <IconButton
             edge="start"
             color="inherit"
-            onClick={handleClose}
+            onClick={()=>setOpen(false)}
             aria-label="close"
           >
             <CloseIcon/>
@@ -63,7 +53,7 @@ export const DialogFxHat = ({open, setOpen, handleWet, wet, handleDecay, decay, 
           </Typography>
         </Toolbar>
       </AppBar>
-      <AccordionFx handleWet={handleWet} wet={wet} handleDecay={handleDecay} decay={decay} handlePreDelay={handlePreDelay} preDelay={preDelay}/>
+      <AccordionFx setFeedbackDelay={setFeedbackDelay} feedbackDelay={feedbackDelay}/>
     </Dialog>
   );
 }

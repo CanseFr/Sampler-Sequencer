@@ -62,6 +62,7 @@ import {GridSampleSequence} from "../generic-components/grid-sample-sequence";
 import * as Tone from "tone";
 import Button from "@mui/material/Button";
 import {DialogFxHat} from "../fx/dialog-fx-hat";
+import {FeedbackDelayType, initFeedbackDelay} from "../types/feedback-delay";
 
 
 export const HatSequence = ({timePoint, sequence, setSequence}: InstrumentSequenceProps) => {
@@ -72,19 +73,12 @@ export const HatSequence = ({timePoint, sequence, setSequence}: InstrumentSequen
     hat_chipitaka
   ).toDestination();
 
-  const [wet, setWet] = useState<number>(0);
-  const [decay, setDecay] = useState<number>(0.2);
-  const [preDelay, setPreDelay] = useState<number>(0.2);
+  const [feedbackDelay, setFeedbackDelay] = useState<FeedbackDelayType>(initFeedbackDelay);
 
-  const handleWet = () => {
-    setWet(wet === 0 ? 1 : 0);
-  };
-
-
-  const feedbackDelay = new Tone.Reverb({
-    "wet": wet,
-    "decay": decay,
-    "preDelay": preDelay
+  const toneFeedbackDelay = new Tone.Reverb({
+    "wet": feedbackDelay.wet,
+    "decay": feedbackDelay.decay,
+    "preDelay": feedbackDelay.preDelay
   }).toDestination();
 
   const handleSelectHat = (index: number) => {
@@ -98,18 +92,18 @@ export const HatSequence = ({timePoint, sequence, setSequence}: InstrumentSequen
   useEffect(() => {
     if (sequence[timePoint - 1] === 1) {
       Tone.loaded().then(() => {
-        player.connect(feedbackDelay).start();
+        player.connect(toneFeedbackDelay).start();
       });
     }
-  }, [feedbackDelay, player, sequence, timePoint]);
+  }, [toneFeedbackDelay, player, sequence, timePoint]);
 
   return (
     <>
-      {open && <DialogFxHat open={open} setOpen={setOpen} wet={wet} handleWet={handleWet} handleDecay={setDecay} decay={decay} handlePreDelay={setPreDelay} preDelay={preDelay}/>}
+      {open && <DialogFxHat open={open} setOpen={setOpen} feedbackDelay={feedbackDelay} setFeedbackDelay={setFeedbackDelay}/>}
       <GridSampleSequence>
 
         <Typography>Hat</Typography>
-        <Button variant="outlined" onClick={()=>setOpen(!open)}>
+        <Button variant="outlined" onClick={() => setOpen(!open)}>
           FX
         </Button>
         {sequence.map((item, index) => (

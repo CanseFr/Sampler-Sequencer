@@ -1,4 +1,5 @@
 import * as React from 'react';
+import {Dispatch, SetStateAction} from 'react';
 import Accordion from '@mui/material/Accordion';
 import AccordionActions from '@mui/material/AccordionActions';
 import AccordionSummary from '@mui/material/AccordionSummary';
@@ -9,20 +10,14 @@ import {pink} from "@mui/material/colors";
 import Switch from '@mui/material/Switch';
 import {FormControlLabel, Grid} from "@mui/material";
 import {KnobButton} from "../generic-components/knob-button";
-import {Dispatch, SetStateAction} from "react";
+import {FeedbackDelayType} from "../types/feedback-delay";
 
-interface FxProps {
-  handleWet: any;
-  wet: number;
-
-  handleDecay: Dispatch<SetStateAction<number>>;
-  decay: number;
-
-  handlePreDelay: Dispatch<SetStateAction<number>>;
-  preDelay: number;
+interface AccordionFxProps {
+  setFeedbackDelay: Dispatch<SetStateAction<FeedbackDelayType>>;
+  feedbackDelay: FeedbackDelayType;
 }
 
-export const AccordionFx = ({handleWet, wet, handleDecay, decay, preDelay, handlePreDelay}: FxProps) => {
+export const AccordionFx = ({setFeedbackDelay, feedbackDelay}: AccordionFxProps) => {
 
   return (
     <div className="Bg-Color">
@@ -55,19 +50,19 @@ export const AccordionFx = ({handleWet, wet, handleDecay, decay, preDelay, handl
               {/* ON OFF Delay*/}
               <FormControlLabel
                 control={<Switch/>}
-                onClick={handleWet}
-                label={wet ? "On" : "Off"}
+                onClick={() => setFeedbackDelay((prev) => ({...prev, wet: prev.wet === 0 ? 1 : 0}))}
+                label={feedbackDelay.wet ? "On" : "Off"}
               />
             </Grid>
 
             {/*Decay*/}
             <Grid item>
-              <KnobButton label="Decay" value={decay} setValue={handleDecay} min={0.1} max={2.5} step={0.1}/>
+              <KnobButton label="Decay" value={feedbackDelay} setValue={setFeedbackDelay} keyParam="decay" min={0.1} max={2.5} step={0.1}/>
             </Grid>
 
             {/*PreDelay*/}
             <Grid item>
-              <KnobButton label="Decay" value={preDelay} setValue={handlePreDelay} min={0.1} max={2.5} step={0.1}/>
+              <KnobButton label="Predelay" value={feedbackDelay} setValue={setFeedbackDelay}  keyParam="preDelay" min={0.1} max={2.5} step={0.1}/>
             </Grid>
           </Grid>
         </AccordionDetails>
