@@ -6,6 +6,8 @@ import { HatSequence } from "./components/drum-section/hat-sequence";
 import { ClapSequence } from "./components/drum-section/clap-sequence";
 import { pink } from "@mui/material/colors";
 import { WavSequence } from "./components/drum-section/wav-sequence";
+import PlayArrowIcon from '@mui/icons-material/PlayArrow';
+import PauseIcon from '@mui/icons-material/Pause';
 
 export const markIndexSequence = [1, 5, 9, 13, 17, 21, 25, 29]
 const TOTAL_STEPS = 16
@@ -29,6 +31,16 @@ function App() {
     setClapSequence(new Array(TOTAL_STEPS).fill(0));
     setKickSequence(new Array(TOTAL_STEPS).fill(0));
     setWavSequence(new Array(TOTAL_STEPS).fill(0));
+  }
+
+  const handlePlayPause = () =>{
+    if(play){
+      setPlay(false);
+    }
+    if(!play){
+      setTimePoint(0)
+      setPlay(true);
+    }
   }
 
   useEffect(() => {
@@ -62,7 +74,7 @@ function App() {
         </Box>
 
         <Box sx={{ width: 200 }}>
-          <Button onClick={() => setPlay(!play)}>{play ? 'Stop' : 'Play'}</Button>
+          <Button onClick={handlePlayPause}>{play ? <PauseIcon/> :<PlayArrowIcon/> }</Button>
         </Box>
 
         <Grid container justifyContent="space-around">
